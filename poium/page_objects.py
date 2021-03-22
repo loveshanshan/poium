@@ -115,9 +115,13 @@ class Element(object):
             if len(elems) == 1:
                 logging.info("✅ Find element: {by}={value} ".format(
                     by=elem[0], value=elem[1]))
+                print("✅ Find element: {by}={value} ".format(
+                    by=elem[0], value=elem[1]))
                 break
             elif len(elems) > 1:
                 logging.info("❓ Find {n} elements through: {by}={value}".format(
+                    n=len(elems), by=elem[0], value=elem[1]))
+                print("❓ Find {n} elements through: {by}={value}".format(
                     n=len(elems), by=elem[0], value=elem[1]))
                 break
             else:
@@ -125,6 +129,7 @@ class Element(object):
         else:
             error_msg = "❌ Find 0 elements through: {by}={value}".format(by=elem[0], value=elem[1])
             logging.error(error_msg)
+            print(error_msg)
             raise NoSuchElementException(error_msg)
 
     def __get_element(self, by, value):
@@ -218,6 +223,7 @@ class Element(object):
         """Clears the text if it's a text entry element."""
         elem = self.__get_element(self.k, self.v)
         logging.info("clear element: {}".format(self.desc))
+        print("clear element: {}".format(self.desc))
         elem.clear()
 
     def send_keys(self, value):
@@ -226,18 +232,21 @@ class Element(object):
         """
         elem = self.__get_element(self.k, self.v)
         logging.info("🖋 input element: {}".format(self.desc))
+        print("🖋 input element: {}--> {}".format(self.desc, value))
         elem.send_keys(value)
 
     def click(self):
         """Clicks the element."""
         elem = self.__get_element(self.k, self.v)
         logging.info("🖱 click element: {}".format(self.desc))
+        print("🖱 click element: {}".format(self.desc))
         elem.click()
 
     def submit(self):
         """Submits a form."""
         elem = self.__get_element(self.k, self.v)
         logging.info("submit element: {}".format(self.desc))
+        print("submit element: {}".format(self.desc))
         elem.submit()
 
     @property
@@ -516,6 +525,8 @@ class Elements(object):
         except NoSuchElementException:
             elems = []
         logging.info("✨ Find {n} elements through: {by}={value}, describe:{desc}".format(
+            n=len(elems), by=self.k, value=self.v, desc=self.describe))
+        print("✨ Find {n} elements through: {by}={value}, describe:{desc}".format(
             n=len(elems), by=self.k, value=self.v, desc=self.describe))
         return elems
 
