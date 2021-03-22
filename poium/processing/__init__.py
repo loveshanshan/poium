@@ -37,14 +37,13 @@ def processing(image, w=None, h=None):
     点击截图增加水印
     """
     font_size = 200
-    font_dir = os.path.join(BASE_DIR, "processing/font/Songti.ttc")
-    font = ImageFont.truetype(font_dir, font_size)
+
     if w is not None and h is not None:
         im1 = Image.open(image)
         w = w - font_size / 2
         h = h - font_size / 2 - 40
         draw = ImageDraw.Draw(im1)
-        draw.text((w, h), "⊙", (255, 0, 0, 255), font=font)  # 设置文字位置/内容/颜色/字体
+        draw.text((w, h), "⊙", (255, 0, 0, 255))  # 设置文字位置/内容/颜色/字体
         ImageDraw.Draw(im1)  # Just draw it!
         im1.save(image)
 
